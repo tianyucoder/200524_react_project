@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import ajax from './utils/ajax'
 
 export default class App extends Component {
-	componentDidMount(){
-		axios.get('http://localhost:3000/v1/common/countryData').then(
-			response => {console.log(response.data);},
-			error => {console.log(error);}
-		)
+	async componentDidMount(){
+		const result = await ajax({
+			url:'http://localhost:3000/v1/login/phone',
+			method:'POST',
+			data:{
+				phone:'13655663344',
+				code:'775879'
+			}
+		})
+		console.log(result);
 	}
 	render() {
 		return (

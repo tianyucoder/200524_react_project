@@ -4,6 +4,8 @@ import axios from 'axios'
 import NProgress from 'nprogress'
 //引入nprogress样式
 import 'nprogress/nprogress.css'
+//
+import {Toast} from 'antd-mobile'
 
 //创建一个axios实例
 const ajax = axios.create({
@@ -21,3 +23,29 @@ ajax.interceptors.request.use(
 )
 
 //应用响应拦截器
+ajax.interceptors.response.use(
+	response => {
+		NProgress.done()
+		//响应成功了（状态码为2开头）
+		console.log('响应拦截器成功的回调执行了');
+		if(response.data.code === 20000){
+			//业务逻辑成功
+			return response.data
+		}else{
+			//业务逻辑失败
+			Toast.fail(response.data.message)
+			// return Promise.reject(response.data.message)
+			return new Promise(()=>{})
+		}
+	},
+	error => {
+		NProgress.done()
+		//响应失败了（状态码不是2开头）
+		console.log('响应拦截器失败的回调执行了',error);
+		Toast.fail(error.message)
+		// return Promise.reject(error.message)
+		return new Promise(()=>{})
+	}
+)
+
+export default ajax

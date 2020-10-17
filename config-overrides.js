@@ -2,8 +2,10 @@ const {
 	override, 
 	fixBabelImports,
 	addLessLoader,
-	addPostcssPlugins
+	addPostcssPlugins,
+	addWebpackAlias
 } = require('customize-cra');
+const {resolve} = require('path')
 
 module.exports = override(
   fixBabelImports('import', {
@@ -22,5 +24,8 @@ module.exports = override(
 				},
 			}
 		}),
-	addPostcssPlugins([require("postcss-px2rem")({ remUnit: 37.5 })])
+	addPostcssPlugins([require("postcss-px2rem")({ remUnit: 37.5 })]),
+	addWebpackAlias({
+		'@':resolve(__dirname,"./src")
+	})
 );
