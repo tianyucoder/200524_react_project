@@ -1,23 +1,21 @@
-import React, { Component } from 'react'
-import ajax from './utils/ajax'
+import React, { Component,Suspense} from 'react'
+import {Switch,Route} from 'react-router-dom'
+import Loading from '@/components/Loading'
+import routes from '@/config/routes'
 
 export default class App extends Component {
-	async componentDidMount(){
-		const result = await ajax({
-			url:'http://localhost:3000/v1/login/phone',
-			method:'POST',
-			data:{
-				phone:'13655663344',
-				code:'775879'
-			}
-		})
-		console.log(result);
-	}
 	render() {
 		return (
-			<div>
-				App....
-			</div>
+			<Suspense fallback={<Loading/>}>
+				<Switch>
+					{
+						routes.map((route)=>(
+							<Route key={route.path} {...route}/>
+						))
+					}
+				</Switch>
+			</Suspense>
+			
 		)
 	}
 }
