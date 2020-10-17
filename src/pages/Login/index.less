@@ -1,0 +1,35 @@
+.login-wraper{
+	width: 100%;
+	height: 100%;
+	.content{
+		width: 100%;
+		height: 100%;
+		background-color: white;
+		padding: 20px;
+		.phone_country{
+			display: flex;
+			align-items: center;
+			margin-left: 17px;
+		}
+		.code{
+			display: flex;
+			.code_btn{
+				position: relative;
+				margin-left: 15px;
+				border: 0px;
+				background-color: transparent;
+				color: #BBBBBB;
+				&::after{
+					position: absolute;
+					content:'';
+					width: 1px; /* no */
+					height: 28px;
+					background-color: #BBBBBB;
+					top: 50%;
+					transform: translateY(-50%);
+					left: -4px;
+				}
+			}
+		}
+	}
+}
