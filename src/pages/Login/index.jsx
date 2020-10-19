@@ -7,11 +7,22 @@ import wechat from '@/assets/imgs/wechat.png'
 
 export default class Login extends Component {
 
+	state = {
+		countryCode:'86'
+	}
+
 	goCountryPicker = ()=>{
-		this.props.history.push('/countrypicker')
+		const {pathname} = this.props.location
+		this.props.history.push('/countrypicker',{pathname})
+	}
+
+	componentDidMount(){
+		const {state} = this.props.location
+		if(state) this.setState({countryCode:state.countryCode})
 	}
 
 	render() {
+		const {countryCode} = this.state
 		return (
 			<div className="login-wraper">
 				 {/* 顶部导航区域 */}
@@ -21,7 +32,7 @@ export default class Login extends Component {
 						{/* 手机号输入区 */}
 						<InputItem clear placeholder="请输入手机号">
 							<div className="phone_country">
-								<span onTouchEnd={this.goCountryPicker}>+86</span>
+								<span onTouchEnd={this.goCountryPicker}>+{countryCode}</span>
 								<Icon type="down" />
 							</div>
 						</InputItem>

@@ -1,0 +1,33 @@
+.country-container{
+	.navbar{
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		z-index: 10;	
+	}
+	.country-list{
+		margin-top: 45px;
+		.list{
+			padding-right: 20px;
+		}
+		.list-container{
+			position: relative;
+			.hide-point{
+				position: absolute;
+				top: -45px;
+			}
+		}
+	}
+	.right-nav{
+		position: fixed;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 5px;
+		display: flex;
+		flex-direction: column;
+		.nav-item{
+			color: gray;
+		}
+	}
+}
