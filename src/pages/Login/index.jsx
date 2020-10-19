@@ -5,7 +5,9 @@ import github from '@/assets/imgs/github.png'
 import qq from '@/assets/imgs/qq.png'
 import wechat from '@/assets/imgs/wechat.png'
 
+//手机号校验正则
 const phoneReg = /^(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+//验证码校验正则
 const codeReg = /^\d{6}$/
 export default class Login extends Component {
 
@@ -51,7 +53,9 @@ export default class Login extends Component {
 
 	//跳转到手机号国家选择器
 	goCountryPicker = ()=>{
+		//获取当前路径
 		const {pathname} = this.props.location
+		//跳转国家选择组件
 		this.props.history.push('/countrypicker',{pathname})
 	}
 
