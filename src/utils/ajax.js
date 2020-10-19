@@ -30,7 +30,7 @@ ajax.interceptors.response.use(
 		console.log('响应拦截器成功的回调执行了');
 		if(response.data.code === 20000){
 			//业务逻辑成功
-			return response.data
+			return response.data.data
 		}else{
 			//业务逻辑失败
 			Toast.fail(response.data.message)

@@ -1,6 +1,6 @@
 import {lazy} from 'react'
 const Login = lazy(()=>import('@/pages/Login'))
-const Test = lazy(()=>import('@/pages/Test'))
+const CountryPicker = lazy(()=>import('@/pages/CountryPicker'))
 
 export default [
 	{
@@ -8,7 +8,7 @@ export default [
 		component:Login
 	},
 	{
-		path:'/test',
-		component:Test
+		path:'/countrypicker',
+		component:CountryPicker
 	}
 ]
