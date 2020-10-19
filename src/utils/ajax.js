@@ -33,6 +33,7 @@ ajax.interceptors.response.use(
 		}else{
 			//业务逻辑失败
 			Toast.fail(response.data.message)
+			//是否终止Promise链取决于具体业务，以后需要这个错误，进行进一步判断，就不要中断Promise链
 			return Promise.reject(response.data.message)
 			// return new Promise(()=>{})
 		}
