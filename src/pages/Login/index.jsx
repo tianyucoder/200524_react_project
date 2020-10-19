@@ -65,8 +65,11 @@ export default class Login extends Component {
 
 	//请求登录
 	login = async()=>{
+		//获取手机号、所属国家、验证码
 		const {phone,code,countryCode} = this.state
+		//拼接所属国家代码+手机号
 		const formatedPhone = countryCode + '+' + phone
+		//请求手机号+验证码登录
 		const result = await reqLogin(formatedPhone,code)
 	}
 
@@ -91,7 +94,6 @@ export default class Login extends Component {
 				 <NavBar mode="light">手机验证码登录</NavBar>
 				 {/* 内容区 */}
 				 <div className="content">
-
 						{/* 手机号输入区 */}
 						<InputItem 
 							clear 
@@ -105,7 +107,6 @@ export default class Login extends Component {
 								<Icon type="down" />
 							</div>
 						</InputItem>
-
 						{/* 验证码输入区 */}
 						<div className="code">
 							<InputItem 
