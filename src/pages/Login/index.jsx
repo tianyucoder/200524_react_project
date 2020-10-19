@@ -47,7 +47,6 @@ export default class Login extends Component {
 			let {time} = this.state
 			time--
 			if(time <= 0){
-				console.log('@');
 				clearInterval(this.timer)
 				this.setState({time:60,canClick:true})
 				return
@@ -69,7 +68,6 @@ export default class Login extends Component {
 		const {phone,code,countryCode} = this.state
 		const formatedPhone = countryCode + '+' + phone
 		const result = await reqLogin(formatedPhone,code)
-		console.log(result);
 	}
 
 	componentDidMount(){
