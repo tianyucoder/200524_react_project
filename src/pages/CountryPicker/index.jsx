@@ -5,7 +5,7 @@ import {reqAllCountryList} from '@/api/country'
 export default class CountryPicker extends Component {
 
 	state = {
-		countryList:
+		countryList:{}
 	}
 
 	//获取所有国家列表
