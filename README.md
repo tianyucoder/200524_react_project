@@ -45,3 +45,11 @@
 										modifyVars: { '@primary-color': 'orange' },
 									}),
 							);
+## 5.项目中集成antd-monbile
+## 6.rem适配
+## 7.配置代理+封装axios
+## 8.redux环境搭建
+## 9.配置路径别名
+## 10.路由配置文件的使用
+## 11.NavBar组件的使用
+## 12.登录页面_静态
