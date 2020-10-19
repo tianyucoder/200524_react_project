@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { NavBar,InputItem,Icon,Button,Toast} from 'antd-mobile';
-import './index.less'
 import github from '@/assets/imgs/github.png'
 import qq from '@/assets/imgs/qq.png'
 import wechat from '@/assets/imgs/wechat.png'
 import {reqVerifyCode,reqLogin} from '@/api/login'
+import './index.less'
 
 //手机号校验正则
 const phoneReg = /^(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
@@ -70,7 +70,9 @@ export default class Login extends Component {
 		//拼接所属国家代码+手机号
 		const formatedPhone = countryCode + '+' + phone
 		//请求手机号+验证码登录
-		const result = await reqLogin(formatedPhone,code)
+		await reqLogin(formatedPhone,code)
+		Toast.success('登录成功！')
+		this.props.history.replace('/usercenter')
 	}
 
 	componentDidMount(){

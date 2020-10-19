@@ -14,3 +14,16 @@ export const reqLogin = (phone,code)=>{
 		data:{phone,code}
 	})
 }
+export const reqVerifyLogin = ()=>{
+	return ajax({
+		url:'/v1/login/verify',
+		method:'POST',
+	})
+}
+export const reqLogout = (id)=>{
+	return ajax({
+		url:'/v1/logout',
+		method:'POST',
+		data:{_id:id}
+	})
+}

@@ -33,8 +33,8 @@ ajax.interceptors.response.use(
 		}else{
 			//业务逻辑失败
 			Toast.fail(response.data.message)
-			// return Promise.reject(response.data.message)
-			return new Promise(()=>{})
+			return Promise.reject(response.data.message)
+			// return new Promise(()=>{})
 		}
 	},
 	error => {
