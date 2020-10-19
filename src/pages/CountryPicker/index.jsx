@@ -72,7 +72,7 @@ export default class CountryPicker extends Component {
 				<div className="right-nav">
 					{
 						keys.map((key)=>{
-							return <a key={key} className="nav-item" onTouchEnd={this.handleRightNavTouch(key)}>{key}</a>
+							return <span key={key} className="nav-item" onTouchEnd={this.handleRightNavTouch(key)}>{key}</span>
 						})
 					}
 				</div>

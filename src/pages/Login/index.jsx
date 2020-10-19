@@ -4,6 +4,7 @@ import './index.less'
 import github from '@/assets/imgs/github.png'
 import qq from '@/assets/imgs/qq.png'
 import wechat from '@/assets/imgs/wechat.png'
+import {reqVerifyCode,reqLogin} from '@/api/login'
 
 //手机号校验正则
 const phoneReg = /^(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
@@ -16,7 +17,7 @@ export default class Login extends Component {
 		isFirst:true,//是否第一次打开login页面
 		phone:'', //收集手机号
 		code:'', //收集验证码
-		time:10, //验证码倒计时
+		time:60, //验证码倒计时
 		canClick:true //验证码按钮是否可以点击
 	}
 
@@ -35,16 +36,20 @@ export default class Login extends Component {
 	}
 
 	//获取验证码
-	getVerifyCode = ()=>{
-		console.log('请求服务器获取一个验证码');
+	getVerifyCode = async()=>{
+		const {phone,countryCode} = this.state
+	  await reqVerifyCode(countryCode+'+'+phone)
+		Toast.success('验证码下发成功，请查收！')
+		//让按钮不能点击
 		this.setState({canClick:false})
+		//开启定时器更新倒计时
 		this.timer = setInterval(()=>{
 			let {time} = this.state
 			time--
 			if(time <= 0){
 				console.log('@');
 				clearInterval(this.timer)
-				this.setState({time:20,canClick:true})
+				this.setState({time:60,canClick:true})
 				return
 			}
 			this.setState({time})
@@ -57,6 +62,14 @@ export default class Login extends Component {
 		const {pathname} = this.props.location
 		//跳转国家选择组件
 		this.props.history.push('/countrypicker',{pathname})
+	}
+
+	//请求登录
+	login = async()=>{
+		const {phone,code,countryCode} = this.state
+		const formatedPhone = countryCode + '+' + phone
+		const result = await reqLogin(formatedPhone,code)
+		console.log(result);
 	}
 
 	componentDidMount(){
@@ -115,7 +128,12 @@ export default class Login extends Component {
 							</button>
 						</div>
 				 		{/* 登录按钮 */}
-						<Button type="primary" className="login_btn">登录</Button>
+						<Button 
+							type="primary" 
+							className="login_btn"
+							disabled={(phone && code)? false : true}
+							onClick={this.login}
+						>登录</Button>
 						{/* 底部区域 */}
 						<footer className="footer">
 							<span className="text">其他登录方式</span>

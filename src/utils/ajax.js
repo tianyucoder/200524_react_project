@@ -27,7 +27,6 @@ ajax.interceptors.response.use(
 	response => {
 		NProgress.done()
 		//响应成功了（状态码为2开头）
-		console.log('响应拦截器成功的回调执行了');
 		if(response.data.code === 20000){
 			//业务逻辑成功
 			return response.data.data
