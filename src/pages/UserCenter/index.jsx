@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import {reqVerifyLogin} from '@/api/login'
 import { NavBar,Button,List,Modal} from 'antd-mobile';
+import {connect} from 'react-redux'
 import './index.less'
 import {reqLogout} from '@/api/login'
+import {saveUser} from '@/redux/actions/user'
 
 const {Item} = List
 const {alert} = Modal
-export default class UserCenter extends Component {
+
+class UserCenter extends Component {
 
 	state = {
 		userInfo:{}
@@ -28,6 +31,7 @@ export default class UserCenter extends Component {
 		try {
 			const userInfo =  await reqVerifyLogin()
 			this.setState({userInfo})
+			this.props.saveUser(userInfo)
 		} catch (error) {
 			this.props.history.replace('/login')
 		}
@@ -55,3 +59,9 @@ export default class UserCenter extends Component {
 		)
 	}
 }
+
+
+export default connect(
+	()=>({}),
+	{saveUser}
+)(UserCenter)

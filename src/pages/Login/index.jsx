@@ -5,6 +5,7 @@ import qq from '@/assets/imgs/qq.png'
 import wechat from '@/assets/imgs/wechat.png'
 import {reqVerifyCode,reqLogin} from '@/api/login'
 import './index.less'
+import {CLIENT_ID} from '@/config/github'
 
 //手机号校验正则
 const phoneReg = /^(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/
@@ -26,11 +27,11 @@ export default class Login extends Component {
 		return (value)=>{
 			this.setState({isFirst:false})
 			if(type === 'phone'){
-				if(phoneReg.test(value)) this.setState({phone:value,phoneHasError:false})
-				else this.setState({phone:'',phoneHasError:true})
+				if(phoneReg.test(value)) this.setState({phone:value})
+				else this.setState({phone:''})
 			}else{
-				if(codeReg.test(value)) this.setState({code:value,codeHasError:false})
-				else this.setState({code:'',codeHasError:true})
+				if(codeReg.test(value)) this.setState({code:value})
+				else this.setState({code:''})
 			}
 		}
 	}
@@ -73,6 +74,10 @@ export default class Login extends Component {
 		await reqLogin(formatedPhone,code)
 		Toast.success('登录成功！')
 		this.props.history.replace('/usercenter')
+	}
+
+	githubLogin = ()=>{
+		window.location.href = "https://github.com/login/oauth/authorize?client_id="+CLIENT_ID
 	}
 
 	componentDidMount(){
@@ -139,7 +144,7 @@ export default class Login extends Component {
 						<footer className="footer">
 							<span className="text">其他登录方式</span>
 							<div className="type_group">
-								<img src={github} alt=""/>
+								<img onTouchEnd={this.githubLogin} src={github} alt=""/>
 								<img src={qq} alt=""/>
 								<img src={wechat} alt=""/>
 							</div>

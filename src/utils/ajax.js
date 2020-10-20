@@ -9,7 +9,7 @@ import {Toast} from 'antd-mobile'
 
 //创建一个axios实例
 const ajax = axios.create({
-  baseURL: '/', //请求公共路径
+  baseURL: '/v1', //请求公共路径
   timeout: 3000, //超时时间
 });
 
